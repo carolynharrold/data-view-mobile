@@ -1,6 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
+import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
+import tidePoolData from '../data/tidepool-data.json';
 
 import {
   Container,
@@ -45,6 +47,7 @@ export default class HomeScreen extends React.Component {
 
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
+              Hello
             </Text>
           </View>
         </View>

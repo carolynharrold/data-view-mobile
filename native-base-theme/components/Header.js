@@ -13,17 +13,17 @@ export default (variables /* : * */ = variable) => {
     '.span': {
       height: 128,
       'NativeBase.Left': {
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
       },
       'NativeBase.Body': {
         alignSelf: 'flex-end',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        paddingBottom: 26
+        paddingBottom: 26,
       },
       'NativeBase.Right': {
-        alignSelf: 'flex-start'
-      }
+        alignSelf: 'flex-start',
+      },
     },
     '.hasSubtitle': {
       'NativeBase.Body': {
@@ -32,14 +32,14 @@ export default (variables /* : * */ = variable) => {
           fontFamily: variables.titleFontfamily,
           textAlign: 'center',
           fontWeight: '500',
-          paddingBottom: 3
+          paddingBottom: 3,
         },
         'NativeBase.Subtitle': {
           fontSize: variables.subTitleFontSize,
           fontFamily: variables.titleFontfamily,
           color: variables.subtitleColor,
           textAlign: 'center'
-        }
+        },
       }
     },
     '.transparent': {
