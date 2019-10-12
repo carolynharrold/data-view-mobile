@@ -38,9 +38,9 @@ export default (variables /* : * */ = variable) => {
           fontSize: variables.subTitleFontSize,
           fontFamily: variables.titleFontfamily,
           color: variables.subtitleColor,
-          textAlign: 'center'
+          textAlign: 'center',
         },
-      }
+      },
     },
     '.transparent': {
       backgroundColor: 'transparent',
@@ -55,7 +55,7 @@ export default (variables /* : * */ = variable) => {
       height:
         platform === PLATFORM.ANDROID
           ? variables.toolbarHeight + StatusBar.currentHeight
-          : variables.toolbarHeight
+          : variables.toolbarHeight,
     },
     '.noShadow': {
       elevation: 0,

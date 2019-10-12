@@ -1,27 +1,13 @@
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Alert,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
-import data from "../data/tidepool-data.json";
-
-import {
-  Container,
-  Header,
-  Body,
-  Title,
-  Left,
-  Right,
-  Content,
-  Text,
-  Button,
-} from "native-base";
+import { StyleSheet, View, Alert, FlatList, ActivityIndicator } from "react-native";
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from "victory-native";
+import { Container, Header, Body, Title, Left, Right, Content, Text, Button } from "native-base";
 
 import { TextTitle } from "../components/TextTitle";
+import data from "../data/tidepool-data.json";
+
+
 
 export default class DataScreen extends React.Component {
   constructor(props) {
@@ -32,7 +18,7 @@ export default class DataScreen extends React.Component {
       dataSource: [],
     };
 
-    this.useLocalData = true;
+    this.useLocalData = false;
   }
 
   componentDidMount() {
@@ -42,21 +28,45 @@ export default class DataScreen extends React.Component {
         dataSource: data,
       });
     } else {
-      return fetch("https://potterverse.herokuapp.com/data/characters_basic")
-      // if you wanted to fetch data from an API rather than using local data
+      console.log(false);
+      const tempData = [
+          {
+              "deviceTime": "2018-12-31T19:02:25",
+              "value": "9.991",
+          },
+          {
+              "deviceTime": "2019-02-01T05:39:52",
+              "value": "12.378",
+          },
+          {
+              "deviceTime": "2019-03-04T14:27:19",
+              "value": "7.382",
+          },
+          {
+              "deviceTime": "2019-04-06T00:00:00",
+              "value": "9.39393",
+          },
+          {
+              "deviceTime": "2019-05-14T06:25:41",
+              "value": "0",
+          },
+      ];
 
-        .then(response => {
-          return response.json();
-        })
-        .then(responseJson => {
-          this.setState({
-            isLoading: false,
-            dataSource: responseJson,
-          });
-        })
-        .catch(error => {
-          console.log("error");
-        });
+      const editedTempData = tempData.map((cv, i) => {
+        const editedObj = {};
+        editedObj.deviceTime = cv.deviceTime;
+        editedObj.value = Number(cv.value).toFixed(1);
+        return editedObj;
+      })
+      console.log('tempData: ', tempData);
+      console.log('editedTempData: ', editedTempData);
+
+
+      this.setState((prevState) => ({
+          isLoading: false,
+          dataSource: editedTempData,
+      }));
+
     }
   }
 
@@ -69,10 +79,39 @@ export default class DataScreen extends React.Component {
       );
     }
 
+    console.log('this.state: ', this.state);
+    console.log(7654.9.toFixed(3))
+
     return (
       <Container>
         <Content padder>
           <TextTitle title="Imported from tidepool-data" />
+           <VictoryChart domainPadding={20}>
+            <VictoryBar 
+              data={this.state.dataSource}
+              x="deviceTime"
+              y="value"
+              barRatio={10}
+              style={{ data: { fill: "tomato", width: 25 } }}
+              
+            />
+            <VictoryAxis
+              label="Date and Time"
+              offsetX={200}
+              tickValues={this.state.dataSource.map((cv, i) => {
+                return i += 1;
+              })}
+              tickFormat={this.state.dataSource.map((cv, i) => {
+                return cv.deviceTime;
+              })}
+            /> 
+            <VictoryAxis
+              dependentAxis
+              // tickFormat specifies how ticks should be displayed
+              tickFormat={(x) => {x}}
+              label="Value"
+            />
+          </VictoryChart>
 
           <FlatList
             style={{ paddingTop: 20 }}

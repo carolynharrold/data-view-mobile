@@ -21,6 +21,7 @@
     "expo-constants": "^5.0.0",
     "expo-font": "^5.0.0",
     "expo-web-browser": "^5.0.0",
+    "fs": "0.0.1-security",
     "native-base": "^2.13.7",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
